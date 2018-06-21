@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem 'httparty'
 
 gem 'rails',        '5.1.4'
 gem 'bcrypt', git: 'https://github.com/codahale/bcrypt-ruby.git', :require => 'bcrypt'

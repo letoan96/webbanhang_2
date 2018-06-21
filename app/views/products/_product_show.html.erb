@@ -29,7 +29,7 @@
         </div>
         <div class="details col-md-6">
           <h3 class="product-title"><%= @product.name %></h3>
-          <div class="rating">
+          <!-- <div class="rating">
             <div class="stars">
               <span class="fa fa-star checked"></span>
               <span class="fa fa-star checked"></span>
@@ -38,26 +38,16 @@
               <span class="fa fa-star checked"></span>
             </div>
             <span class="review-no">41 reviews</span>
-          </div>
+          </div> -->
           <p class="product-description"><%= @product.description %></p>
-          <h4 class="price">current price:
-            <span>$<%= @product.price %></span></h4>
-          <p class="vote">
-            <strong>91%</strong>
-            of buyers enjoyed this product!
-            <strong>(87 votes)</strong>
-          </p>
-          <h5 class="sizes">sizes:
-            <span class="size" data-toggle="tooltip" title="small">s</span>
-            <span class="size" data-toggle="tooltip" title="medium">m</span>
-            <span class="size" data-toggle="tooltip" title="large">l</span>
-            <span class="size" data-toggle="tooltip" title="xtra large">xl</span>
-          </h5>
-          <h5 class="colors">colors:
-            <span class="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
-            <span class="color green"></span>
-            <span class="color blue"></span>
-          </h5>
+          <h4 class="price">Giá:
+            <span><%= @product.price.to_i %> VND</span></h4>
+          
+          <!-- <h5 class="colors">colors:
+            <span class="color black" data-toggle="tooltip" title="Not In store"></span>
+            <span class="color green not-available"></span>
+            <span class="color blue not-available"></span>
+          </h5> -->
           <div class="action">
 
             <%if !@current_cart.products.include?(product)%>
@@ -65,7 +55,7 @@
                 <!-- Add to Basket -->
                 <%=button_to line_items_path(:product_id => product.id), class: "btn btn-warning" , style: "margin-top:15px;" , params:{productID: product.id} do %>
                 <i class="glyphicon glyphicon-plus" style="color:black;"></i>
-                Add to Basket
+                Thêm vào giỏ hàng
               <% end %>
               <%# end %>
               <%else %>

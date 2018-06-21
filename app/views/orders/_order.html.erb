@@ -2,26 +2,27 @@
   <%= link_to ( gravatar_for User.find_by(id:order.user_id), size: 100 ) , User.find_by(id:order.user_id) %>
   Order ID
   <%= order.id %>
-  , User ID
-  <%= order.user_id %></h3>
+  -
+  <%= order.created_at.strftime("%H:%M %d %b. %Y") %> </h3>
 <p>
-  <strong>Name:</strong>
-  <%= User.find_by(id:order.user_id).name %>
+  <strong>Tên Khách Hàng:</strong>
+  <%= User.find_by(id: order.user_id).name %><br>
 
-  ,
+  <strong>Số điện thoại:</strong>
+  <%= User.find_by(id: order.user_id).phone_number %><br>
+
   <strong>Email:</strong>
-  <%= User.find_by(id:order.user_id).email %>
+  <%= User.find_by(id: order.user_id).email %><br>
 
-  ,
-  <strong>Pay_method:</strong>
-  <%= order.pay_method %></p>
-<p>
   <strong>
-    Description</strong>
-  <div class="well well-sm"><%= order.description %></div>
+    Địa chỉ</strong>
+  <div class="well well-sm"><%= order.address %></div>
+
+  <strong>Lưu ý:</strong>
+  <%= order.description.length > 10 ? order.description : "Không có" %><br>
 </p>
 <p>
-  <h3>Total price:
+  <h3>Giá trị đơn hàng:
     <%= number_to_currency(order.sub_total) %></h3>
 </p>
 

@@ -2,7 +2,7 @@
   <%= link_to ( gravatar_for user, size: 100 ) , user %>
   <%= link_to user.name, user %>
   <p>
-    <%= pluralize(user.microposts.count, "micropost") %>
+    Đã có <%= user.order.count %> đơn hàng.
   </p>
   <% if user.admin? %>
     <span>

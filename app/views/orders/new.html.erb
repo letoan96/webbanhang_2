@@ -12,16 +12,19 @@
     </div>
   <% end %>
   <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description , required: true %>
+    <%= f.label 'Địa chỉ nhận hàng' %><br>
+    <%= f.text_field :address, rautofocus: true, required: true, value: current_user.address %>
   </div>
   <div class="field">
-    <%= f.label :pay_method %>
-    <%= f.text_field :pay_method, required: true, autofocus: true %>
-    <%#= f.select :pay_method, Order.pay_methods.keys, prompt: 'Select a payment method' %>
-    </div>
+    <%= f.label 'Phương thức thanh toán' %>
+    <%= f.text_field :pay_method, value: 'Giao hàng thu tiền (COD)', :readonly => true %>
+  </div>
+  <div class="field">
+    <%= f.label 'Thông tin thêm' %><br>
+    <%= f.text_area :description, placeholder: 'Bạn muốn lưu ý gì khi mua hàng?' %>
+  </div>
     <div class="actions">
-      <%= f.submit 'Place Order' %>
+      <%= f.submit 'Đặt hàng', class: 'btn btn-primary' %>
     </div>
 
     <%= render 'shared/cart2' , :cart => @cart %>

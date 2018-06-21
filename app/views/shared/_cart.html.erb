@@ -1,6 +1,6 @@
 <section class="jumbotron text-center">
   <div class="container">
-    <h1 class="jumbotron-heading">My Cart</h1>
+    <h1 class="jumbotron-heading">Giỏ hàng</h1>
   </div>
 </section>
 
@@ -12,10 +12,10 @@
           <thead>
             <tr>
               <th scope="col"></th>
-              <th scope="col">Product</th>
-              <th scope="col">Available</th>
-              <th scope="col" class="text-center">Quantity</th>
-              <th scope="col" class="text-right">Price</th>
+              <th scope="col">Sản phẩmr</th>
+              <th scope="col">Tình trạng</th>
+              <th scope="col" class="text-center">Số lượng</th>
+              <th scope="col" class="text-right">Giá</th>
               <th></th>
             </tr>
           </thead>
@@ -62,10 +62,10 @@
         </div>
         <% if(@current_cart.line_items.count !=0 ) %>
           <div class="col-sm-12  col-md-4">
-            <%= button_to "Empty cart", cart_path(@current_cart),method: :delete, data: {confirm: "Are you sure?"} , class: "btn btn-lg btn-block btn-warning text-uppercase"%>
+            <%= button_to "Xóa giỏ hàng", cart_path(@current_cart),method: :delete, data: {confirm: "Are you sure?"} , class: "btn btn-lg btn-block btn-warning text-uppercase"%>
           </div>
           <div class="col-sm-12 col-md-4 text-right">
-            <%= button_to "Checkout", new_order_path , method: :get,class: "btn btn-lg btn-block btn-success text-uppercase"%>
+            <%= button_to "Đặt hàng", new_order_path , method: :get,class: "btn btn-lg btn-block btn-success text-uppercase"%>
           </div>
         <% end %>
       </div>

@@ -1,3 +1,4 @@
+<!-- 
 <% provide(:title, @user.name) %>
   <div class="row">
     <aside class="col-md-4">
@@ -24,3 +25,47 @@
     <!-- <div class="col-md-4"> <% if @user.microposts.any? %> <h3>Microposts (<%= @user.microposts.count %>)</h3> <%= will_paginate @microposts %> <ol class="microposts"> <%= render @microposts %> </ol> <%= will_paginate @microposts %> <% end %> </div>
     -->
   </div>
+ -->
+
+<% provide(:title, @user.name) %>
+  <div class="row">
+    <aside class="col-md-4">
+    </aside>
+    <div class="col-md-5">
+      <%= form_for(@user) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  
+  <%= f.label 'Tên khách hàng' %>
+  <%= f.text_field :name, class: 'form-control' %>
+
+  <%= f.label 'Email' %>
+  <%= f.email_field :email, class: 'form-control' %>
+
+  <%= f.label 'Số điện thoại' %>
+  <%= f.text_field :phone_number, class: 'form-control' %>
+
+  <%= f.label 'Địa chỉ' %>
+  <%= f.text_field :address, class: 'form-control' %>
+
+  <%= f.submit 'Lưu thay đổi', class: "btn btn-primary" %>
+<% end %>
+    </div>
+  
+  </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+ 

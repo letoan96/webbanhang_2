@@ -1,56 +1,70 @@
-<li>
+<!-- <div class="card">
+    <img class="card-img-top" src="http://file.vforum.vn/hinh/2018/01/top-nhung-hot-girl-viet-nam-xinh-nhat-hien-nay-2018-14.png" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+  </div> -->
 
-  <%= link_to product do%>
-  <% if product.picture? %>
-    <%= image_tag product.picture.url %>
-  <% else %>
-    <%= image_tag "no_image.png", size:"150x150" %>
-  <%end%>
-<%end %>
 
-<strong>
-  Name2 :
-</strong>
-<%= product.name %>
-,<strong>
-  Description :
-</strong>
-<%= product.description %>
-<strong>
-  Price :
-</strong>
-<%= product.price %>
-$
+<!-- <div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+      <img src="http://file.vforum.vn/hinh/2018/01/top-nhung-hot-girl-viet-nam-xinh-nhat-hien-nay-2018-14.png" alt="asd">
+      <div class="caption">
+        <h3>Thumbnail label</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div> -->
 
-<p>
+<li class="product-list__item product">
+    <%= link_to product,{ :class => "product__image-link", :title => product.name  } do %>
+    
+      <% if product.picture? %>
+        <%= image_tag(product.picture.url, class: "product__image") %>
+      <% else %>
+        <%= image_tag("no_image.png", class: "product__image") %>
+      <%end%>
+    </a>
+    <%end %>
+    
+    <div class="product__info">
+      <h2 class="product__title">
+        <a class="product__title-link" href="#" title="Lorem ipsum dolor sit amet"><%= product.name %></a>
+      </h2>
+      <h3 class="product__brand">
+        <a class="product__brand-link" href="#" title="Nulla vel libero"><%= product.description %></a>
+      </h3>
+    </div>
+    <div class="product__price">
+      Giá: <%= product.price.to_i %> VND
+    </div>
+    <div class="card-footer">
+      
 
   <%if !@current_cart.products.include?(product)%>
-    <%# if logged_in? %>
-      <!-- Add to Basket -->
+   
       <%=button_to line_items_path(:product_id => product.id), class: "btn btn-warning" , style: "margin-top:15px;" , params:{productID: product.id} do %>
       <i class="glyphicon glyphicon-plus" style="color:black;"></i>
-      Add to Basket
+      Thêm vào giỏ hàng
     <% end %>
     <%# end %>
     <%else %>
-      <!-- See lineItem section below for explanation of line_item links -->
-
-      <!-- <li> -->
-      <!-- <%#= link_to "Add one", line_item_add_path(:id => line_item), method: :post %> -->
-
-      <!-- reduce -->
+      
       <%=link_to line_item_reduce_path(:id =>@current_cart.line_items.find_by(product_id: product.id)) , method: :post, class: "btn btn-danger" , style: "margin-top:15px;" do %>
       <i class="glyphicon glyphicon-minus" style="color:black;"></i>
       Reduce
     <% end %>
 
-    <!-- add -->
+    
     <%=link_to line_item_add_path(:id => @current_cart.line_items.find_by(product_id: product.id)) , method: :post , class: "btn btn-success" , style: "margin-top:15px;" do %>
     <i class="glyphicon glyphicon-plus" style="color:black;"></i>
     Add
   <% end %>
 
-  <!-- Remove -->
+  
   <%=link_to line_item_path(@current_cart.line_items.find_by(product_id: product.id)) ,method: :delete ,class: "btn btn-warning" , style: "margin-top:15px;" do %>
   <i class="glyphicon glyphicon-remove" style="color:black;"></i>
   Remove Item
@@ -64,22 +78,89 @@ $
 
 </li>
 <%end %>
-</p>
-
-<p>
-
-<!-- Only Admin is allowed to modify products -->
 <% if logged_in? && current_user.admin? %>
-<%= link_to edit_product_path(product) do %>
-<i class="glyphicon glyphicon-pencil" style="color:darkgray"></i>
-Edit
+    <%= link_to edit_product_path(product) do %>
+    <i class="glyphicon glyphicon-pencil" style="color:darkgray"></i>
+    Edit
+    <% end %>
+    or
+    
+    <%= link_to product, method: :delete, data: { confirm: 'Are you sure?' } do %>
+    <i class="glyphicon glyphicon-fire" style="color:firebrick"></i>
+    Destroy
+    <% end %>
+    <% end %>
+    </div>
+  </li>
+
+<!-- <div class="col-sm-6 col-md-3" >
+  <div class="thumbnail">
+    <%= link_to product do %>
+      <% if product.picture? %>
+        <%= image_tag(product.picture.url) %>
+      <% else %>
+        <%= image_tag("no_image.png") %>
+      <%end%>
+    <%end %>
+  <div class="caption">
+    <h3><%= product.name %></h3>
+    <p class="card-text">
+      <%= product.description %>
+      <h4>
+        Giá: <%= product.price.to_i %> VND
+      </h4>
+    </p>
+  </div>
+  <div class="card-footer">
+      
+
+  <%if !@current_cart.products.include?(product)%>
+   
+      <%=button_to line_items_path(:product_id => product.id), class: "btn btn-warning" , style: "margin-top:15px;" , params:{productID: product.id} do %>
+      <i class="glyphicon glyphicon-plus" style="color:black;"></i>
+      Thêm vào giỏ hàng
+    <% end %>
+    <%# end %>
+    <%else %>
+      
+      <%=link_to line_item_reduce_path(:id =>@current_cart.line_items.find_by(product_id: product.id)) , method: :post, class: "btn btn-danger" , style: "margin-top:15px;" do %>
+      <i class="glyphicon glyphicon-minus" style="color:black;"></i>
+      Reduce
+    <% end %>
+
+    
+    <%=link_to line_item_add_path(:id => @current_cart.line_items.find_by(product_id: product.id)) , method: :post , class: "btn btn-success" , style: "margin-top:15px;" do %>
+    <i class="glyphicon glyphicon-plus" style="color:black;"></i>
+    Add
+  <% end %>
+
+  
+  <%=link_to line_item_path(@current_cart.line_items.find_by(product_id: product.id)) ,method: :delete ,class: "btn btn-warning" , style: "margin-top:15px;" do %>
+  <i class="glyphicon glyphicon-remove" style="color:black;"></i>
+  Remove Item
 <% end %>
-or
-<!-- Basket -->
-<%= link_to product, method: :delete, data: { confirm: 'Are you sure?' } do %>
-<i class="glyphicon glyphicon-fire" style="color:firebrick"></i>
-Destroy
-<% end %>
-<% end %>
-</p>
+
+<li>
+  Quantity:
+  <%= @current_cart.line_items.find_by(product_id: product.id).quantity %>
+  | Total Price:
+  <%= number_to_currency(@current_cart.line_items.find_by(product_id: product.id).total_price) %>
+
 </li>
+<%end %>
+<% if logged_in? && current_user.admin? %>
+    <%= link_to edit_product_path(product) do %>
+    <i class="glyphicon glyphicon-pencil" style="color:darkgray"></i>
+    Edit
+    <% end %>
+    or
+    
+    <%= link_to product, method: :delete, data: { confirm: 'Are you sure?' } do %>
+    <i class="glyphicon glyphicon-fire" style="color:firebrick"></i>
+    Destroy
+    <% end %>
+    <% end %>
+    </div>
+</div>
+</div>
+ -->

@@ -3,51 +3,40 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="nav-btn btn-dark btn-lg accordion-toggle pull-left collapsed" title="Follow Us" role="tab" id="social-collapse" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne"></a>
-      <!-- <a id="menu-toggle" href="#" class="nav-btn btn-dark btn-lg toggle"> <i class="fa fa-bars" style="color:#fff;"></i> </a> -->
-      <a id="to-top" class="btn btn-lg btn-inverse" href="#top">
-        <span class="sr-only">Toggle to Top Navigation</span>
-        <i class="fa fa-chevron-up"></i>
-      </a>
-    </div>
+    
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse js-navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-left">
         <a class="navbar-brand" href="#">
-          <%= link_to "Dope Shop", root_path, id: "logo" %>
-          <%= link_to image_tag("logo.png",size:"52x52" , alt: "Rails logo"), root_path %>
+          <%= link_to "Gearshop", root_path, id: "logo" %>
         </a>    
         <!-- <li> <a href="#">Store locator</a> </li> -->
       </ul>
+
       <ul class="nav navbar-nav navbar-right">
         <!-- Home -->
         <li><%= link_to root_path do %>
           <i class="glyphicon glyphicon-home"></i>
-          Home
+          Trang chủ
         <% end %>
       </li>
 
       <!-- Users -->
       <% if logged_in? %>
-
+        <% if @current_user.admin? %>
         <li><%= link_to users_path do %>
           <i class="fa fa-users"></i>
-          Users
+          Thành viên
           <span class="badge ">
             <i id="total_cart_items_badge">(<%= User.count %>)</i>
           </span>
+        <% end %>
         <% end %>
       </li>
 
       <!-- Cart -->
       <li><%= link_to cart_path(@current_cart) do %>
-        My Cart
+        Giỏ hàng
         <span class="badge ">
           <i class="fa fa-cart-plus" style="color:#FFD700; font-size:20px"></i>
 
@@ -58,15 +47,12 @@
 
     <!-- Orders -->
     <li><%= link_to orders_path do %>
-      My Orders
+        <%if @current_user.admin? %>
+        Đơn hàng
       <span class="badge ">
           <i class="fa fa-shopping-basket" style="color:#FFD700; font-size:20px"></i>
-        <%if @current_user.admin? %>
           (<%= @current_user.orders.count %>) Admin / (<%= Order.count%>) Total
-        <% else %>
-          <%= @current_user.orders.count %>
         <% end %>
-
       </span>
     <% end %>
   </li>
@@ -74,7 +60,7 @@
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
       <%= gravatar_for @current_user, size: 20 %>
-      Account
+      Tài khoản
       <b class="caret"></b>
     </a>
     <ul class="dropdown-menu">
@@ -87,7 +73,7 @@
               <p class="text-center small">
                 <%= link_to edit_user_path(current_user) do %>
                 <i class="glyphicon glyphicon-picture"></i>
-                Change Photo
+                Đổi ảnh đại diện
               <% end %>
             </p>
           </div>
@@ -98,7 +84,12 @@
             <div class="divider"></div>
             <%= link_to current_user , class: "btn btn-primary btn-sm active" do %>
             <i class="glyphicon glyphicon-eye-open"></i>
-            View Profile
+            Xem thông tin
+          <% end %>
+          <% if !@current_user.admin?  %>
+            <div>
+              <%= link_to 'Xem đơn hàng', orders_path  %>
+            </div>
           <% end %>
         </div>
       </div>
@@ -109,13 +100,13 @@
           <div class="col-md-6">
             <%= link_to edit_user_path(current_user), class:"btn btn-default btn-sm" do %>
             <i class="glyphicon glyphicon-cog"></i>
-            Change Password
+            Đổi mật khẩu
           <% end %>
         </div>
         <div class="col-md-6">
           <%= link_to logout_path,class: "btn btn-default btn-sm pull-right", method: :delete do %>
           <i class="glyphicon glyphicon-off"></i>
-          Sign out
+          Thoát
         <% end %>
       </div>
     </div>
@@ -130,7 +121,7 @@
 <!-- Log In -->
 <li><%= link_to login_path do %>
 <i class="glyphicon glyphicon-log-out"></i>
-Log In
+Đăng nhập
 <% end %>
 </li>
 

@@ -2,9 +2,9 @@
   <div class="center jumbotron">
   <h2>
     <% if params[:search].blank?  %>
-      All Users (<%= @users.count %>)
+      Tất cả khách hàng (<%= @users.count %>)
     <%else %>
-      Found => [
+      Kết quả tìm kiếm => [
       <%= pluralize(@users.count, " ] user") %>
     <%end %>
   </h2>

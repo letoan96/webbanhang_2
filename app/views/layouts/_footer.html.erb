@@ -4,28 +4,31 @@
     <footer class="footer">
       <div class="container">
 
-        <%= render "/layouts/reviews" %>
+        
 
         <hr class="style15">
 
         <div class="row">
           <div class="col-sm-3">
-            <h4 class="title">About us</h4>
-            <p>With 5 years market experience we are here to give you the best products on the best price .</p>
-            <!-- <ul class="social-icon"> <a href="#" class="social"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a href="#" class="social"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="#" class="social"><i class="fa fa-instagram"
-            aria-hidden="true"></i></a> <a href="#" class="social"><i class="fa fa-youtube-play" aria-hidden="true"></i></a> <a href="#" class="social"><i class="fa fa-google" aria-hidden="true"></i></a> <a href="#" class="social"><i class="fa fa-dribbble"
-            aria-hidden="true"></i></a> </ul> -->
+            <h4 class="title">Về chúng tôi</h4>
+            <p>Chuyên kinh doanh các loại gaming gear</p>
+            <h5>Địa chỉ:</h5>
+            - Đại học công nghệ thông tin TP.HCM
+            <h5>Liên hệ:</h5>
+            - 08 123456
+            <h5>Giờ làm việc: 8:00 - 18:00</h5>
+            <%= image_tag('http://online.gov.vn/PublicImages/2015/08/27/11/20150827110756-dathongbao.png', size: "260x100") %>
           </div>
           <div class="col-sm-3">
             <h4 class="title">My Account</h4>
             <span class="acount-icon">
               <%= link_to orders_path do %>
               <i class="fa fa-heart" aria-hidden="true"></i>
-              Orders
+              Đơn hàng
             <% end %>
             <%= link_to cart_path(@current_cart) do %>
             <i class="fa fa-cart-plus" aria-hidden="true"></i>
-            Cart
+            Giỏ hàng
           <% end %>
           <%= link_to current_user do %>
           <i class="fa fa-user" aria-hidden="true"></i>
@@ -33,7 +36,7 @@
         <% end %>
         <%= link_to users_path do %>
         <i class="fa fa-users" aria-hidden="true"></i>
-        Users
+        Người sử dụng
       <% end %>
       <!-- <a href="#"> <i class="fa fa-globe" aria-hidden="true"></i> Language</a> -->
     </span>
@@ -41,27 +44,17 @@
   <div class="col-sm-3">
     <h4 class="title">Category</h4>
     <div class="category">
-      <a href="#">Men</a>
-      <a href="#">Women</a>
-      <a href="#">Boy</a>
-      <a href="#">Girl</a>
-      <a href="#">Bag</a>
-      <a href="#">Toys</a>
-      <a href="#">Hair Accessories</a>
-      <a href="#">Shoes</a>
-      <a href="#">Glasses</a>
-      <a href="#">Baby clothes</a>
+      <a href="#">Gaming Gear</a>
+      <a href="#">Logitech</a>
+      <a href="#">Bàn phím không dây</a>
+      <a href="#">Chuột không dây</a>
+
     </div>
   </div>
   <div class="col-sm-3">
-    <h4 class="title">Payment Methods</h4>
-    <p>You can pay using...</p>
+    <h4 class="title">Phương thức thanh toán</h4>
+    <p>Thanh toán bằng:</p>
     <ul class="payment">
-      <li>
-        <a href="#">
-          <i class="fa fa-cc-amex" aria-hidden="true"></i>
-        </a>
-      </li>
       <li>
         <a href="#">
           <i class="fa fa-credit-card" aria-hidden="true"></i>
@@ -83,12 +76,15 @@
 <hr class="style18">
 
 <div class="row text-center">
+
   ©
   <%= Date.today.year %>
   .
-  <a href="http://www.goxr3plus.co.nf" target="_blank">GOXR3PLUS Studio
+  <a href="#" target="_blank">letranthetoan
   </a>
+
 </div>
+
 </div>
 
 </footer>

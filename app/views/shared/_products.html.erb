@@ -1,62 +1,55 @@
-<!-- <input type="text" class="form-control" placeholder="Search...."/> <div class="input-group-btn"> <div class="btn-group" role="group"> <div class="dropdown dropdown-lg"> -->
-<!-- <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <span class="caret"></span></button> <div class="dropdown-menu dropdown-menu-right" role="menu"> <form class="form-horizontal"
-role="form"> <div class="form-group"> <label for="filter">Filter by</label> <select class="form-control"> <option value="0">Featured</option> <option value="1">Most popular</option> <option value="2" selected="selected">Top rated</option> <option
-value="3">Most commented</option> </select> </div> <div class="form-group"> <label for="contain">Top Seller</label> <input class="form-control" type="text"/> </div> <div class="form-group"> <label for="contain">Contains the words</label> <input
-class="form-control" type="text"/> </div> <button type="submit" class="btn btn-primary"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button> </form> </div> -->
-<!-- </div> <button type="button" class="btn btn-primary"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button> </div> </div> -->
 
-<div class="center jumbotron">
-  <h2>
-    <% if params[:search].blank?  %>
-      All Products (<%= @products.count %>)
-    <%else %>
+ <div class="row">
+  <div class="center jumbotron">
+    <h4>
+      <% if params[:search].blank?  %>
+      Tất cả sản phẩm (<%= @products.count %>)
+      <%else %>
       Found => [
       <%= pluralize(@products.count, " ] Product") %>
+      <%end %>
+    </h4>
+
+    <!-- Search Bar -->
+   
+    <%= form_tag(root_url, :method => "get", id: "search-form") do %>
+    <div class="input-group" id="adv-search">
+      <%= text_field_tag :search, params[:search], placeholder: "Tìm kiếm sản phẩm..." , class: "form-control" %>
+      <div class="input-group-btn">
+        <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+        <span class="glyphicon glyphicon-search"></span>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+
+
+    <!-- Only Admin is allowed to create new products -->
+    <% if logged_in? && current_user.admin? %>
+    <%= link_to new_product_path , class: "btn btn-success" , style: "margin-top:15px;" do %>
+    <i class="glyphicon glyphicon-plus" style="color:black;"></i>
+    Tạo sản phẩm mới (Admin)
     <%end %>
-  </h2>
-
-<!-- Search Bar -->
-<%= form_tag(root_url, :method => "get", id: "search-form") do %>
-<div class="input-group" id="adv-search">
-  <%= text_field_tag :search, params[:search], placeholder: "Search..." , class: "form-control" %>
-  <div class="input-group-btn">
-    <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
-    <span class="glyphicon glyphicon-search"></span>
-  <% end %>
+    <% end %>
   </div>
-</div>
-<% end %>
 
-<!-- Only Admin is allowed to create new products -->
-<% if logged_in? && current_user.admin? %>
-<%= link_to new_product_path , class: "btn btn-success" , style: "margin-top:15px;" do %>
-<i class="glyphicon glyphicon-plus" style="color:black;"></i>
-Create New Product (Admin)
-<%end %>
-<% end %>
-</div>
-
-
-<%= will_paginate @products %>
-
-<ul class="users">
-<% if @products.present? %>
-
-<%= render @products %>
-<%# @products.each do |product| %>
-<%#= render 'shared/product' , product: product %>
-  <%# end %>
-  </ul>
 
   <%= will_paginate @products %>
 
-<% else %>
-  <p>
-    <br/><br/><hr/>
-    There are no products containing the term(s) => [
-    <strong><%= params[:search] %></strong>
-    ] .
+  <div class="product-list">
+    
+    <% if @products.present? %>
+      <%= render @products %>
+    <% else %>
+      <p>
+        <br/><br/><hr/>
+        There are no products containing the term(s) => [
+        <strong><%= params[:search] %></strong>
+        ] 
+      </p>
+    <% end %>
+    
+  </div>
 
-  </p>
-<% end %>
-<br>
+  <%= will_paginate @products %>
+</div>
